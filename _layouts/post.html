@@ -31,7 +31,23 @@
         .meta-table td { padding: 8px 15px; border: 1px solid #d0d7de; }
         .tag { background: #ddf4ff; color: #0969da; padding: 2px 8px; border-radius: 12px; font-size: 0.85em; margin-right: 5px; display: inline-block; margin-bottom: 2px; }
         
-        /* 코드 블록 스타일 보정 */
+        /* [추가] 복사 버튼을 위한 래퍼 및 버튼 스타일 */
+        .code-wrapper { position: relative; margin-bottom: 20px; }
+        .copy-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: #f6f8fa;
+            border: 1px solid #d0d7de;
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-size: 12px;
+            cursor: pointer;
+            color: #24292e;
+            z-index: 10;
+        }
+        .copy-btn:hover { background-color: #e1e4e8; }
+        
         pre { background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow: auto; }
     </style>
 </head>
@@ -84,12 +100,18 @@
             
             {% if page.snort2_rule %}
             <h3>Snort 2 Rule</h3>
-            <div class="highlight"><pre><code>{{ page.snort2_rule }}</code></pre></div>
+            <div class="code-wrapper">
+                <button class="copy-btn" onclick="copyCode(this)">📋 Copy</button>
+                <div class="highlight"><pre><code>{{ page.snort2_rule }}</code></pre></div>
+            </div>
             {% endif %}
 
             {% if page.snort3_rule %}
             <h3>Snort 3 Rule</h3>
-            <div class="highlight"><pre><code>{{ page.snort3_rule }}</code></pre></div>
+            <div class="code-wrapper">
+                <button class="copy-btn" onclick="copyCode(this)">📋 Copy</button>
+                <div class="highlight"><pre><code>{{ page.snort3_rule }}</code></pre></div>
+            </div>
             {% endif %}
 
             {% unless page.snort2_rule or page.snort3_rule %}
@@ -99,6 +121,7 @@
     </div>
 
     <script>
+        // 탭 전환 함수
         function openTab(tabName) {
             var contents = document.getElementsByClassName("content-section");
             var buttons = document.getElementsByClassName("tab-button");
@@ -108,6 +131,26 @@
             
             document.getElementById(tabName).classList.add("active");
             document.getElementById("btn-" + tabName).classList.add("active");
+        }
+
+        // [추가] 복사 기능 함수
+        function copyCode(btn) {
+            // 버튼 바로 다음에 있는 코드 블록(.highlight) 안의 텍스트를 찾음
+            var codeBlock = btn.nextElementSibling.querySelector('code, pre');
+            var text = codeBlock.innerText;
+
+            // 클립보드에 쓰기
+            navigator.clipboard.writeText(text).then(function() {
+                // 성공 시 버튼 텍스트 변경
+                var originalText = btn.innerText;
+                btn.innerText = "✅ Copied!";
+                setTimeout(function() {
+                    btn.innerText = originalText;
+                }, 2000);
+            }, function(err) {
+                console.error('Copy failed', err);
+                alert('복사에 실패했습니다.');
+            });
         }
 
         window.onload = function() {
