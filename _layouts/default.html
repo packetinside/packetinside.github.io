@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ site.title | default: page.title }}</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css">
+    
+    <style>
+        /* 1. 화면 너비 설정 (95% 사용) */
+        body { 
+            box-sizing: border-box; 
+            min-width: 200px; 
+            
+            /* [핵심] 화면의 95%까지 사용하여 넓게 표시 */
+            max-width: 95%; 
+            
+            margin: 0 auto; /* 화면 중앙 정렬 */
+            padding: 45px; 
+        }
+
+        @media (max-width: 767px) { 
+            body { padding: 15px; } 
+        }
+        
+        /* 링크 스타일 */
+        a { text-decoration: none; color: #0969da; }
+        a:hover { text-decoration: underline; }
+
+        /* 테이블 스타일: 컨테이너 너비(95%)를 꽉 채움 */
+        table { display: table; width: 100%; }
+
+        /* [핵심] 헤더 스타일: 왼쪽 정렬 */
+        header {
+            margin-bottom: 40px;
+            width: 100%;
+            text-align: left; /* 왼쪽 정렬 */
+        }
+        header h1 {
+            font-size: 2em;
+            margin-bottom: 0.2em;
+            border-bottom: none; 
+        }
+        header p {
+            font-size: 1.1em;
+            color: #57606a;
+            margin-bottom: 15px;
+        }
+        
+        /* GitHub 프로필 버튼 */
+        .github-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            color: #24292e !important;
+            background-color: #f6f8fa;
+            border: 1px solid rgba(27,31,35,0.15);
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none !important;
+            transition: 0.2s;
+        }
+        .github-btn:hover {
+            background-color: #f3f4f6;
+            border-color: rgba(27,31,35,0.15);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="markdown-body">
+        
+        <header>
+            <h1>{{ site.title | default: "Nuclei & Snort Rules Archive" }}</h1>
+            <p>{{ site.description | default: "nuclei-Templates Snort Signature" }}</p>
+            {% if site.github.owner_url %}
+            <a href="{{ site.github.owner_url }}" class="github-btn">
+                View My GitHub Profile
+            </a>
+            {% endif %}
+        </header>
+
+        <hr>
+
+        {{ content }}
+        
+        <footer style="margin-top: 50px; text-align: center; font-size: 0.8em; color: #777;">
+            <hr>
+            <p>Security Rules Archive by PacketInside</p>
+        </footer>
+    </div>
+</body>
+</html>
