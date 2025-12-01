@@ -47,7 +47,14 @@
 
         /* [DataTables 커스텀 스타일] */
         
-        /* 1. 검색창과 페이지 길이 조절 부분 */
+        /* [핵심 수정] 검색창과 테이블 사이의 간격 벌리기 */
+        .dataTables_wrapper .dataTables_filter,
+        .dataTables_wrapper .dataTables_length {
+            margin-bottom: 25px !important; /* 아래쪽 여백 강제 추가 */
+            padding-bottom: 5px;            /* 미세 조정 */
+        }
+
+        /* 인풋 박스 스타일 */
         .dataTables_wrapper .dataTables_filter input {
             border: 1px solid #ced4da; padding: 5px 10px; border-radius: 4px; margin-left: 5px;
         }
@@ -55,7 +62,7 @@
             border: 1px solid #ced4da; padding: 5px; border-radius: 4px;
         }
         
-        /* [핵심 수정] 테이블 간격 조정 및 스타일 */
+        /* 테이블 스타일 */
         table.dataTable,
         .markdown-body table {
             width: 100% !important;
@@ -63,10 +70,7 @@
             border-collapse: collapse !important;
             border: none !important;
             box-shadow: none !important;
-            
-            /* [NEW] 위쪽 여백 추가 (검색창과 간격 벌리기) */
-            margin-top: 40px !important; 
-            margin-bottom: 20px !important;
+            margin-top: 0 !important; /* 테이블 자체 마진은 0으로 (위에서 컨트롤함) */
         }
         
         /* 헤더 셀 */
@@ -93,7 +97,7 @@
             border-bottom: 1px solid #dee2e6 !important;
         }
         
-        /* 3. 페이지네이션 버튼 */
+        /* 페이지네이션 버튼 */
         .dataTables_wrapper .dataTables_paginate .paginate_button.current, 
         .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
             background: #d9534f !important; color: white !important; border: 1px solid #d9534f !important;
