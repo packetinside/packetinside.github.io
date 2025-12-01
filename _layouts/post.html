@@ -10,6 +10,17 @@
         @media (max-width: 767px) { body { padding: 15px; } }
         .markdown-body { box-sizing: border-box; }
         .header-link { font-size: 0.9em; margin-bottom: 20px; display: inline-block; }
+        /* Pcap 버튼 스타일 */
+        .pcap-btn {
+            display: inline-block;
+            background-color: #0366d6;
+            color: white !important;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
@@ -24,6 +35,13 @@
             <a href="{{ page.nuclei_url }}" target="_blank">{{ page.nuclei_url }}</a>
         </p>
         {% endif %}
+
+        <p>
+            <strong>🦈 Packet Capture:</strong> 
+            <a href="/pcaps/{{ page.slug }}.pcap" download class="pcap-btn">
+                ⬇️ Download {{ page.slug }}.pcap
+            </a>
+        </p>
         
         <hr>
         
