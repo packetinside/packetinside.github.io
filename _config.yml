@@ -1,6 +1,6 @@
 title: "Nuclei & Snort Rules Archive"
-# 저장소 이름이 my-vuln-db 라면 아래와 같이 작성 (앞에 슬래시 / 필수)
-baseurl: "/my-vuln-db"  
+# 저장소 이름을 아래와 같이 작성 (앞에 슬래시 / 필수)
+baseurl: "/nuclei-snort-rules"  
 url: "https://packetinside.github.io"
 
 markdown: kramdown
