@@ -1,5 +1,5 @@
 title: "Nuclei & Snort Rules Archive"
-baseurl: "/nuclei-snort-rules"   # 핵심: 레포지토리 이름 앞에 /를 붙여서 입력
+baseurl: ""
 url: "https://packetinside.github.io"
 
 # 마크다운 렌더링 엔진 설정
