@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.cve_id }} - {{ page.title }}</title>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
     <style>
         body { box-sizing: border-box; min-width: 200px; max-width: 980px; margin: 0 auto; padding: 45px; }
         @media (max-width: 767px) { body { padding: 15px; } }
@@ -31,7 +36,7 @@
         .meta-table td { padding: 8px 15px; border: 1px solid #d0d7de; }
         .tag { background: #ddf4ff; color: #0969da; padding: 2px 8px; border-radius: 12px; font-size: 0.85em; margin-right: 5px; display: inline-block; margin-bottom: 2px; }
         
-        /* 룰 박스 스타일 (헤더 + 바디) */
+        /* 룰 박스 스타일 */
         .rule-box {
             border: 1px solid #d0d7de;
             border-radius: 6px;
@@ -39,7 +44,6 @@
             overflow: hidden;
         }
         
-        /* 상단 헤더 (제목 + 버튼) */
         .rule-header {
             background-color: #f6f8fa;
             border-bottom: 1px solid #d0d7de;
@@ -49,13 +53,8 @@
             align-items: center;
         }
         
-        .rule-title {
-            font-weight: 600;
-            font-size: 0.9em;
-            color: #57606a;
-        }
+        .rule-title { font-weight: 600; font-size: 0.9em; color: #57606a; }
 
-        /* 복사 버튼 스타일 */
         .copy-btn {
             background-color: transparent;
             border: 1px solid rgba(27, 31, 35, 0.15);
@@ -68,37 +67,35 @@
             transition: 0.2s;
             background-color: white;
         }
-        .copy-btn:hover {
-            background-color: #f3f4f6;
-            color: #0969da;
-            border-color: #0969da;
-        }
-        .copy-btn.success {
-            border-color: #2da44e;
-            color: #2da44e;
+        .copy-btn:hover { background-color: #f3f4f6; color: #0969da; border-color: #0969da; }
+        .copy-btn.success { border-color: #2da44e; color: #2da44e; }
+
+        .rule-content { background-color: #ffffff; padding: 0; }
+        
+        /* [핵심 수정] 줄바꿈 강제 및 스크롤 제거 */
+        .rule-content pre {
+            margin: 0 !important;
+            padding: 16px !important;
+            border: none !important;
+            border-radius: 0 !important;
+            background-color: #ffffff !important;
+            
+            /* 줄바꿈 강제 적용 */
+            white-space: pre-wrap !important;
+            word-break: break-all !important;
+            overflow-x: hidden !important; /* 가로 스크롤 강제 숨김 */
         }
 
-        /* 하단 코드 영역 */
-        .rule-content {
-            background-color: #ffffff;
-            padding: 0;
+        /* highlight.js가 적용된 code 태그 스타일 보정 */
+        .rule-content pre code {
+            white-space: pre-wrap !important;
+            word-break: break-all !important;
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace !important;
+            font-size: 13px !important;
         }
         
-        /* [수정됨] 자동 줄바꿈 적용 */
-        .rule-content pre {
-            margin: 0;
-            padding: 16px;
-            border: none;
-            border-radius: 0;
-            background-color: #ffffff;
-            font-size: 0.9em;
-            line-height: 1.45;
-            
-            /* 핵심 변경 사항: 가로 스크롤 대신 줄바꿈 */
-            white-space: pre-wrap;       /* 공백은 유지하되 줄바꿈 허용 */
-            word-break: break-all;       /* 긴 단어(Hex값 등) 강제 줄바꿈 */
-            overflow-wrap: break-word;   /* 박스를 넘어가지 않게 처리 */
-        }
+        /* highlight.js 배경색 제거 (박스 배경 사용) */
+        .hljs { background: transparent !important; padding: 0 !important; }
     </style>
 </head>
 <body>
@@ -157,7 +154,7 @@
                     </button>
                 </div>
                 <div class="rule-content">
-                    <div class="highlight"><pre><code>{{ page.snort2_rule }}</code></pre></div>
+                    <pre><code class="language-bash">{{ page.snort2_rule }}</code></pre>
                 </div>
             </div>
             {% endif %}
@@ -171,7 +168,7 @@
                     </button>
                 </div>
                 <div class="rule-content">
-                    <div class="highlight"><pre><code>{{ page.snort3_rule }}</code></pre></div>
+                    <pre><code class="language-bash">{{ page.snort3_rule }}</code></pre>
                 </div>
             </div>
             {% endif %}
@@ -183,6 +180,9 @@
     </div>
 
     <script>
+        // Syntax Highlighting 실행 (색상 입히기)
+        hljs.highlightAll();
+
         function openTab(tabName) {
             var contents = document.getElementsByClassName("content-section");
             var buttons = document.getElementsByClassName("tab-button");
@@ -196,9 +196,8 @@
 
         function copyCode(btn) {
             var box = btn.closest('.rule-box');
-            // innerText 대신 textContent를 사용하여 원본 텍스트(줄바꿈 등)를 최대한 유지
-            var codeBlock = box.querySelector('.rule-content code, .rule-content pre');
-            var text = codeBlock.textContent;
+            var codeBlock = box.querySelector('.rule-content code');
+            var text = codeBlock.innerText; // 하이라이트된 HTML이 아닌 텍스트만 복사
 
             var clipboardIcon = '<svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" class="octicon octicon-copy"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg>';
             var checkIcon = '<svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" class="octicon octicon-check"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg>';
