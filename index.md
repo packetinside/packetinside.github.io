@@ -14,7 +14,7 @@ title: Database
     <tr>
       <th style="width: 15%">CVE ID</th>
       <th style="width: 35%">Title</th>
-      <th style="width: 15%; text-align: center;">Nuclei</th>
+      <th style="width: 15%; text-align: center;">Referer</th>
       <th style="width: 15%; text-align: center;">Pcap</th>
       <th style="width: 20%; text-align: center;">Snort Rule</th>
     </tr>
