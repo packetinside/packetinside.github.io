@@ -45,7 +45,7 @@
 
         .markdown-body { padding: 0 40px 40px 40px; background: transparent; }
 
-        /* [DataTables 커스텀 스타일] - Exploit-DB 느낌 */
+        /* [DataTables 커스텀 스타일] */
         
         /* 1. 검색창과 페이지 길이 조절 부분 */
         .dataTables_wrapper .dataTables_filter input {
@@ -55,21 +55,36 @@
             border: 1px solid #ced4da; padding: 5px; border-radius: 4px;
         }
         
-        /* 2. 테이블 디자인 */
+        /* [핵심 수정] DataTables 세로줄 제거 및 가로줄 스타일링 */
         table.dataTable {
             width: 100% !important;
-            border-collapse: collapse !important;
-            border-bottom: 1px solid #dee2e6 !important;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-collapse: collapse !important; /* 선 겹침 방지 */
+            border: none !important; /* 전체 테두리 제거 */
+            box-shadow: none !important; /* 그림자 제거 */
         }
+        
+        /* 헤더 셀 (세로줄 제거) */
         table.dataTable thead th {
             background-color: #f8f9fa;
-            border-bottom: 2px solid #dee2e6 !important;
+            border-bottom: 2px solid #dee2e6 !important; /* 아래쪽 굵은 선 */
+            border-top: none !important;
+            border-left: none !important;  /* 왼쪽 선 제거 */
+            border-right: none !important; /* 오른쪽 선 제거 */
             padding: 12px 10px !important;
         }
+        
+        /* 데이터 셀 (세로줄 제거) */
         table.dataTable tbody td {
-            padding: 10px 10px !important;
-            border-bottom: 1px solid #e9ecef !important;
+            padding: 12px 10px !important;
+            border-bottom: 1px solid #e9ecef !important; /* 아래쪽 얇은 선 */
+            border-left: none !important;  /* 왼쪽 선 제거 */
+            border-right: none !important; /* 오른쪽 선 제거 */
+            border-top: none !important;
+        }
+        
+        /* 맨 마지막 줄의 아래쪽 선 처리 */
+        table.dataTable.no-footer {
+            border-bottom: 1px solid #dee2e6 !important;
         }
         
         /* 3. 페이지네이션 버튼 */
