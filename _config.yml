@@ -1,11 +1,12 @@
 title: "Nuclei & Snort Rules Archive"
-# 저장소 이름을 아래와 같이 작성 (앞에 슬래시 / 필수)
-baseurl: "/nuclei-snort-rules"  
+baseurl: "/nuclei-snort-rules"   # 핵심: 레포지토리 이름 앞에 /를 붙여서 입력
 url: "https://packetinside.github.io"
 
+# 마크다운 렌더링 엔진 설정
 markdown: kramdown
 theme: jekyll-theme-minimal
 
+# _cves 폴더를 컬렉션(데이터)으로 사용 설정
 collections:
   cves:
     output: true
