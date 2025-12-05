@@ -42,7 +42,7 @@ title: Database
 
       <td style="text-align: center;">
         {% if cve.pcap %}
-        <a href="{{ '/pcaps/' | append: cve.cve_id | append: '.pcap' | relative_url }}" download style="color: #17a2b8; font-size: 0.9em;" title="Download PCAP">
+        <a href="{{ cve.pcap_path | relative_url }}" download style="color: #17a2b8; font-size: 0.9em;" title="Download PCAP">
           <i class="fas fa-download"></i> PCAP
         </a>
         {% else %}
