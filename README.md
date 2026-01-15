@@ -7,7 +7,8 @@
 > **주요 CVE 취약점 분석, PCAP 패킷 캡처 파일, Nuclei 템플릿 및 Snort 탐지 규칙을 제공하는 보안 리서치 저장소입니다.**
 
 ## 📌 소개 (Introduction)
-이 저장소는 최신 보안 취약점(CVE)에 대한 정보와 공격 시나리오를 재현한 데이터를 제공합니다. 보안 연구원, 네트워크 분석가, 그리고 학생들의 학습과 연구를 돕기 위해 운영됩니다.
+이 저장소는 최신 보안 취약점(CVE)에 대한 정보와 공격 시나리오를 재현한 데이터를 제공합니다.
+보안 연구원, 네트워크 분석가, 그리고 학생들의 학습과 연구를 돕기 위해 운영됩니다.
 
 👉 **웹사이트 바로가기:** [https://packetinside.github.io](https://packetinside.github.io)
 
@@ -28,4 +29,5 @@ packetinside.github.io/
 ├── pcaps/              # 공격 패킷 파일 (.pcap)
 ├── nuclei-templates/   # Nuclei 템플릿 (.yaml)
 └── snort-rules/        # Snort 탐지 규칙 (.rules)
+
 
